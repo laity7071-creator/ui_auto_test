@@ -1,0 +1,18 @@
+## 十五、配置文件（完整可运行）
+### 1. config/global_config.yaml（全局配置）
+# 全局通用配置（所有环境共用）
+browser:
+  implicitly_wait: 10
+  explicit_wait: 20
+  headless: false
+
+log:
+  dir: ./logs
+  level: INFO
+
+screenshot:
+  dir: ./screenshots
+
+report:
+  html_dir: ./reports
+  allure_dir: ./allure-results

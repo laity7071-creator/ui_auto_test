@@ -1,0 +1,52 @@
+## 十六、测试用例配置文件（YAML，零代码维护）
+### data/test/baidu_search_cases.yaml
+# 百度搜索测试用例（test环境）
+# 需求变更只改这里，不改任何代码
+cases:
+  - case_id: BD-SMOKE-001
+    case_name: "百度搜索正常关键词"
+    tags: [ "smoke", "baidu" ]
+    priority: "critical"
+    # 测试步骤（完全配置化）
+    steps:
+      - action: "input_text"
+        locator:
+          type: "id"
+          value: "kw"
+        params:
+          text: "${keyword}"
+      - action: "click"
+        locator:
+          type: "id"
+          value: "su"
+      - action: "verify_element_contains_text"
+        locator:
+          type: "xpath"
+          value: "//div[@id='content_left']//h3/a[1]"
+        params:
+          expected: "${expected}"
+    # 多组测试数据
+    data:
+      - keyword: "Python UI自动化"
+        expected: "Python"
+      - keyword: "pytest 教程"
+        expected: "pytest"
+      - keyword: "Selenium 4"
+        expected: "Selenium"
+
+  - case_id: BD-SMOKE-002
+    case_name: "搜索为空验证"
+    tags: [ "smoke", "baidu" ]
+    priority: "normal"
+    steps:
+      - action: "click"
+        locator:
+          type: "id"
+          value: "su"
+      - action: "verify_element_contains_text"
+        locator:
+          type: "xpath"
+          value: "//body"
+        params:
+          expected: "请输入"
+    data: [{}]
